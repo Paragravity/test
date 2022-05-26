@@ -49,6 +49,7 @@ namespace Crypter
                 if (saveFile.ShowDialog() == DialogResult.OK)
                 {
 					Compiler(new string[] { "System.dll", "System.Core.dll", "System.Management.dll" }, contents, saveFile.FileName);
+					File.WriteAllText(saveFile.FileName+".cs", contents);
 				}
             }
         }
