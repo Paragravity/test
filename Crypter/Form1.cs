@@ -44,12 +44,11 @@ namespace Crypter
             string contents = Resources.String1.Replace("lol", Conversions.ToString(this.Brc4(b))).Replace("kkkkk", Randomstring);
             using (SaveFileDialog saveFile = new SaveFileDialog())
             {
-                saveFile.Filter = "File (*.exe)|*.exe";
+                saveFile.Filter = "File (*.cs)|*.cs";
 
                 if (saveFile.ShowDialog() == DialogResult.OK)
                 {
-					Compiler(new string[] { "System.dll", "System.Core.dll", "System.Management.dll" }, contents, saveFile.FileName);
-					File.WriteAllText(saveFile.FileName+".cs", contents);
+					File.WriteAllText(saveFile.FileName, contents);
 				}
             }
         }
@@ -128,35 +127,5 @@ namespace Crypter
                 e.Effect = DragDropEffects.Link;
             else e.Effect = DragDropEffects.None;
         }
-
-		public static void Compiler(string[] referencedAssemblies, string sourceCode,string path)
-		{
-			var providerOptions = new Dictionary<string, string> { { "CompilerVersion", "v4.0" } };
-
-			var compilerOptions = "/platform:anycpu /optimize+ /target:winexe";
-
-			using (var cSharpCodeProvider = new CSharpCodeProvider(providerOptions))
-			{
-				var compilerParameters = new CompilerParameters(referencedAssemblies)
-				{
-					GenerateExecutable = true,
-					GenerateInMemory = false,
-					CompilerOptions = compilerOptions,
-					TreatWarningsAsErrors = false,
-					IncludeDebugInformation = false,
-					OutputAssembly = path
-				};
-
-				var compilerResults = cSharpCodeProvider.CompileAssemblyFromSource(compilerParameters, sourceCode);
-				if (compilerResults.Errors.Count > 0)
-				{
-					StringBuilder sb = new StringBuilder();
-					foreach (CompilerError compilerError in compilerResults.Errors)
-						sb.AppendLine(
-							$"{compilerError.ErrorText}\nLine: {compilerError.Line} - Column: {compilerError.Column}\nFile: {compilerError.FileName}");
-					MessageBox.Show(sb.ToString());
-				}
-			}
-		}
 	}
 }
